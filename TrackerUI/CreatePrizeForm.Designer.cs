@@ -48,7 +48,7 @@
             this.createTournament.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
             this.createTournament.Location = new System.Drawing.Point(12, 9);
             this.createTournament.Name = "createTournament";
-            this.createTournament.Size = new System.Drawing.Size(210, 50);
+            this.createTournament.Size = new System.Drawing.Size(209, 50);
             this.createTournament.TabIndex = 11;
             this.createTournament.Text = "Create Prize";
             // 
@@ -96,6 +96,7 @@
             this.prizeAmountValue.Name = "prizeAmountValue";
             this.prizeAmountValue.Size = new System.Drawing.Size(143, 35);
             this.prizeAmountValue.TabIndex = 17;
+            this.prizeAmountValue.Text = "0";
             // 
             // label2
             // 
@@ -115,6 +116,7 @@
             this.prizePercentageValue.Name = "prizePercentageValue";
             this.prizePercentageValue.Size = new System.Drawing.Size(143, 35);
             this.prizePercentageValue.TabIndex = 19;
+            this.prizePercentageValue.Text = "0";
             // 
             // label3
             // 
@@ -124,7 +126,7 @@
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
             this.label3.Location = new System.Drawing.Point(24, 253);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(228, 40);
+            this.label3.Size = new System.Drawing.Size(227, 40);
             this.label3.TabIndex = 18;
             this.label3.Text = "Prize Percentage";
             // 
@@ -142,6 +144,7 @@
             this.createPrizeButton.TabIndex = 26;
             this.createPrizeButton.Text = "Create Prize";
             this.createPrizeButton.UseVisualStyleBackColor = true;
+            this.createPrizeButton.Click += new System.EventHandler(this.createPrizeButton_Click);
             // 
             // vsLable
             // 

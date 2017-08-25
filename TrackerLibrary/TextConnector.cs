@@ -5,11 +5,11 @@ using TrackerLibrary.Models;
 
 namespace TrackerLibrary
 {
-    public class SQLConnector : IDataConnection
+    public class TextConnector : IDataConnection
     {
         // TODO - Make Method work
         /// <summary>
-        /// Saves a new prize to the database
+        /// Saves a new prize to the textfile
         /// </summary>
         /// <param name="model">The prize information.</param>
         /// <returns>The prize information, including the Id</returns>
