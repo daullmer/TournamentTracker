@@ -27,7 +27,7 @@ namespace TrackerLibrary.Models
             decimal.TryParse(prizeAmount, out decimal pa);
             PrizeAmount = pa;
 
-            double.TryParse(placeNumber, out double pp);
+            double.TryParse(prizePercentage, out double pp);
             PrizePercentage = pp;
         }
     }

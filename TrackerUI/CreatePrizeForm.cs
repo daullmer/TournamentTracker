@@ -30,10 +30,8 @@ namespace TrackerUI
                     prizeAmountValue.Text,
                     prizePercentageValue.Text);
 
-                foreach (var db in GlobalConfig.Connections)
-                {
-                    db.CreatePrize(model);
-                }
+
+                GlobalConfig.Connection.CreatePrize(model);
 
                 placeNumberValue.Text = "";
                 placeNameValue.Text = "";
@@ -55,7 +53,7 @@ namespace TrackerUI
                 output = false;
             }
 
-            if (placeNumber > 1)
+            if (placeNumber < 1)
             {
                 output = false;
             }
@@ -80,7 +78,7 @@ namespace TrackerUI
                 output = false;
             }
 
-            if (prizePercentage < 0 || prizePercentage > 0)
+            if (prizePercentage < 0 || prizePercentage > 100)
             {
                 output = false;
             }
