@@ -40,7 +40,7 @@ namespace TrackerUI
             }
             else
             {
-                MessageBox.Show("The form is invalid.");
+                MessageBox.Show("The form is invalid.", "Error");
             }
         }
 
