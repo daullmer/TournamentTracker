@@ -89,5 +89,57 @@ namespace TrackerLibrary.DataAccess.TextHelpers
 
             File.WriteAllLines(fileName.FullFilePath(), lines);
         }
+
+        public static List<Team> ConvertToTeams(this List<string> lines, string peopleFileName)
+        {
+            List<Team> output = new List<Team>();
+            List<Person> people = peopleFileName.FullFilePath().LoadFile().ConvertToPerson();
+
+            foreach (string line in lines)
+            {
+                string[] cols = line.Split(',');
+
+                Team t = new Team();
+                t.Id = int.Parse(cols[0]);
+                t.TeamName = cols[1];
+
+                string[] personIds = cols[2].Split('|');
+                foreach (string id in personIds)
+                {
+                    t.TeamMembers.Add(people
+                        .Where(x => x.Id == int.Parse(id))
+                        .First());
+                }
+            }
+
+            return output;
+        }
+
+        public static void SaveToTeamFile(this List<Team> models, string filename)
+        {
+            List<string> lines = new List<string>();
+
+            foreach (Team t in models)
+            {
+                lines.Add($"{t.Id},{t.TeamName},{ConvertPeopleListToSting(t.TeamMembers)}");
+            }
+
+            File.WriteAllLines(filename.FullFilePath(), lines);
+        }
+
+        private static string ConvertPeopleListToSting(List<Person> people)
+        {
+            string output = "";
+
+            if (people.Count == 0) return "";
+
+            foreach (Person p in people)
+            {
+                output += $"{p.Id}|";
+            }
+            output = output.Substring(0, output.Length - 1);
+
+            return output;
+        }
     }
 }
