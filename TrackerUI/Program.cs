@@ -17,11 +17,11 @@ namespace TrackerUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
+            
             // Initialize the connections
-            GlobalConfig.InitializeConnections(DatabaseType.TextFile);
+            GlobalConfig.InitializeConnections(DatabaseType.Sql);
 
-            Application.Run(new CreateTeamForm());
+            Application.Run(new CreateTournamentForm());
             //Application.Run(new TournamentDashbordForm());
         }
     }

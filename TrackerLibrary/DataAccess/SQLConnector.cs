@@ -88,5 +88,23 @@ namespace TrackerLibrary.DataAccess
                 return model;
             }
         }
+
+        public List<Team> GetTeam_All()
+        {
+            List<Team> output;
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
+            {
+                output = connection.Query<Team>("dbo.spTeams_GetAll").ToList();
+
+                foreach (Team team in output)
+                {
+                    DynamicParameters param = new DynamicParameters();
+                    param.Add("@TeamId", team.Id);
+                    team.TeamMembers = connection.Query<Person>("dbo.spTeamMembers_GetByTeam", param, commandType: CommandType.StoredProcedure).ToList();
+                }
+            }
+
+            return output;
+        }
     }
 }
