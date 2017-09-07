@@ -35,7 +35,7 @@ namespace TrackerLibrary.DataAccess
                 return model;
             }
         }
-        
+
         public Person CreatePerson(Person model)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
@@ -105,6 +105,56 @@ namespace TrackerLibrary.DataAccess
             }
 
             return output;
+        }
+
+        public void CreateTournament(Tournament model)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
+            {
+                SaveTournament(model, connection);
+                SaveTournamentPrizes(model, connection);
+                SaveTournamentEnterys(model, connection);
+            }
+        }
+
+        private static void SaveTournament(Tournament model, IDbConnection connection)
+        {
+            DynamicParameters param = new DynamicParameters();
+            param.Add("@TournamentName", model.TournamentName);
+            param.Add("@EnteryFee", model.EntryFee);
+            param.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+            connection.Execute("dbo.spTournament_Insert", param, commandType: CommandType.StoredProcedure);
+
+            model.Id = param.Get<int>("@id");
+        }
+
+        private static void SaveTournamentPrizes(Tournament model, IDbConnection connection)
+        {
+            foreach (Prize p in model.Prizes)
+            {
+                DynamicParameters param = new DynamicParameters();
+                param.Add("@TournamentId", model.Id);
+                param.Add("@PrizeId", p.Id);
+                param.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+
+                connection.Execute("dbo.spTournamentPrizes_Insert", param, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        private static void SaveTournamentEnterys(Tournament model, IDbConnection connection)
+        {
+            foreach (Team t in model.EnteredTeams)
+            {
+                DynamicParameters param = new DynamicParameters();
+                param.Add("@TournamentId", model.Id);
+                param.Add("@TeamId", t.Id);
+                param.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+
+                connection.Execute("dbo.spTournamentEnterys_Insert", param, commandType: CommandType.StoredProcedure);
+            }
         }
     }
 }
