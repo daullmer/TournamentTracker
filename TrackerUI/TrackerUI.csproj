@@ -120,7 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TrackerLibrary\TrackerLibrary.csproj">
-      <Project>{482e2a8c-c21b-4298-b5c7-06027ab5a807}</Project>
+      <Project>{ccbef864-840c-40db-98f2-2ece62f6ddd9}</Project>
       <Name>TrackerLibrary</Name>
     </ProjectReference>
   </ItemGroup>

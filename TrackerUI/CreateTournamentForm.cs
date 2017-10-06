@@ -132,6 +132,7 @@ namespace TrackerUI
 
 
             // todo wire up Matchups
+            // todo byes verteil klappt nicht
             TournamentLogic.CreateRounds(tm);
 
             // Create Tournament Entry
