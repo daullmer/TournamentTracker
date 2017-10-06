@@ -15,5 +15,7 @@ namespace TrackerLibrary.Models
             get => $"{FirstName} {LastName}";
         }
 
+        public override string ToString() => FullName;
+
     }
 }

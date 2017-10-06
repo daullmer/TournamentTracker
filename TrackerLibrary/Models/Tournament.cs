@@ -12,5 +12,7 @@ namespace TrackerLibrary.Models
         public List<Team> EnteredTeams { get; set; } = new List<Team>();
         public List<Prize> Prizes { get; set; } = new List<Prize>();
         public List<List<Matchup>> Rounds { get; set; } = new List<List<Matchup>>();
+
+        public override string ToString() => TournamentName;
     }
 }
