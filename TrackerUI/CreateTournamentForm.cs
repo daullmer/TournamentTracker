@@ -131,8 +131,8 @@ namespace TrackerUI
             };
 
 
-            // todo wire up Matchups
-            // todo byes verteil klappt nicht
+            // wire up Matchups
+            // todo in der 2. Runde sind die Teams schon festgelegt?! What?!
             TournamentLogic.CreateRounds(tm);
 
             // Create Tournament Entry

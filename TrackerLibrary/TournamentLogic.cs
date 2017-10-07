@@ -15,57 +15,57 @@ namespace TrackerLibrary
             // check if is big enough - if not, add byes (2*2*2*2 - 2^n) ;
             // Create our first round of matchups ;
             // Create every Round after that - 8 Matchups - 4 Matchups - 2 Matchups - 1 Matchup ;
-            List<Team> randomized = RandomizeTeamOrder(model.EnteredTeams);
-            int rounds = FindNumberOfRounds(randomized.Count);
-            int byes = NumberOfByes(rounds, randomized.Count);
+            List<Team> randomizedTeams = RandomizeTeamOrder(model.EnteredTeams);
+            int rounds = FindNumberOfRounds(randomizedTeams.Count);
+            int byes = NumberOfByes(rounds, randomizedTeams.Count);
 
-            model.Rounds.Add(CreateFirstRound(byes, randomized));
+            model.Rounds.Add(CreateFirstRound(byes, randomizedTeams));
 
             CreateOtherRounds(model, rounds);
         }
 
         private static void CreateOtherRounds(Tournament model, int rounds)
         {
-            int currentRound = 2;
+            int round = 2;
             List<Matchup> previousRound = model.Rounds[0];
             List<Matchup> currRound = new List<Matchup>();
-            Matchup currentMatchup = new Matchup();
+            Matchup currMatchup = new Matchup();
 
-            while (currentRound <= rounds)
+            while (round <= rounds)
             {
                 foreach (Matchup match in previousRound)
                 {
-                    currentMatchup.Entrys.Add(new MatchupEntry { ParentMatchup = match });
+                    currMatchup.Entrys.Add(new MatchupEntry { ParentMatchup = match });
 
-                    if (currentMatchup.Entrys.Count > 1)
+                    if (currMatchup.Entrys.Count > 1)
                     {
-                        currentMatchup.MatchupRound = currentRound;
-                        currRound.Add(match);
-                        currentMatchup = new Matchup();
+                        currMatchup.MatchupRound = round;
+                        currRound.Add(currMatchup);
+                        currMatchup = new Matchup();
                     }
                 }
                 model.Rounds.Add(currRound);
                 previousRound = currRound;
 
                 currRound = new List<Matchup>();
-                currentRound += 1;
+                round += 1;
             }
         }
 
         private static List<Matchup> CreateFirstRound(int byes, List<Team> teams)
         {
             List<Matchup> output = new List<Matchup>();
-            Matchup currentModel = new Matchup();
+            Matchup currentMatchup = new Matchup();
 
             foreach (Team team in teams)
             {
-                currentModel.Entrys.Add(new MatchupEntry { TeamCompeting = team });
+                currentMatchup.Entrys.Add(new MatchupEntry { TeamCompeting = team });
 
-                if(byes > 0 || currentModel.Entrys.Count > 1)
+                if(byes > 0 || currentMatchup.Entrys.Count > 1)
                 {
-                    currentModel.MatchupRound = 1;
-                    output.Add(currentModel);
-                    currentModel = new Matchup();
+                    currentMatchup.MatchupRound = 1;
+                    output.Add(currentMatchup);
+                    currentMatchup = new Matchup();
 
                     if (byes >= 1)
                     {
