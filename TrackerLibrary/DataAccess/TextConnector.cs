@@ -12,7 +12,9 @@ namespace TrackerLibrary.DataAccess
         private const string PrizesFile = "Prizes.csv";
         private const string PeopleFile = "People.csv";
         private const string TeamFile = "Teams.csv";
-        private const string TournamentFile = "Tournaments";
+        private const string TournamentFile = "Tournaments.csv";
+        private const string MatchupFile = "Matchup.csv";
+        private const string MatchupEntryFile = "MatchupEntry.csv";
 
         /// <summary>
         /// Saves a new prize to the textfile
@@ -105,6 +107,9 @@ namespace TrackerLibrary.DataAccess
             }
 
             model.Id = currentId;
+
+            model.SaveRoundsToFile(MatchupFile, MatchupEntryFile);
+
             tournaments.Add(model);
 
             tournaments.SaveToTournamentFile(TournamentFile);
