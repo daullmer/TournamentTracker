@@ -42,7 +42,7 @@
             this.createTournament.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
             this.createTournament.Location = new System.Drawing.Point(65, 9);
             this.createTournament.Name = "createTournament";
-            this.createTournament.Size = new System.Drawing.Size(374, 50);
+            this.createTournament.Size = new System.Drawing.Size(367, 50);
             this.createTournament.TabIndex = 11;
             this.createTournament.Text = "Tournament Dashbord";
             // 
@@ -62,7 +62,7 @@
             this.selectTeamLable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
             this.selectTeamLable.Location = new System.Drawing.Point(131, 68);
             this.selectTeamLable.Name = "selectTeamLable";
-            this.selectTeamLable.Size = new System.Drawing.Size(243, 40);
+            this.selectTeamLable.Size = new System.Drawing.Size(240, 40);
             this.selectTeamLable.TabIndex = 17;
             this.selectTeamLable.Text = "Load Tournament";
             // 
@@ -95,6 +95,7 @@
             this.createTournamentButton.TabIndex = 27;
             this.createTournamentButton.Text = "Create Tournament";
             this.createTournamentButton.UseVisualStyleBackColor = true;
+            this.createTournamentButton.Click += new System.EventHandler(this.createTournamentButton_Click);
             // 
             // TournamentDashbordForm
             // 
