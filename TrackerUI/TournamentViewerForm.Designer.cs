@@ -51,7 +51,7 @@
             this.HeaderLable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
             this.HeaderLable.Location = new System.Drawing.Point(12, 9);
             this.HeaderLable.Name = "HeaderLable";
-            this.HeaderLable.Size = new System.Drawing.Size(220, 50);
+            this.HeaderLable.Size = new System.Drawing.Size(214, 50);
             this.HeaderLable.TabIndex = 0;
             this.HeaderLable.Text = "Tournament:";
             // 
@@ -74,7 +74,7 @@
             this.RoundLable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
             this.RoundLable.Location = new System.Drawing.Point(21, 78);
             this.RoundLable.Name = "RoundLable";
-            this.RoundLable.Size = new System.Drawing.Size(100, 40);
+            this.RoundLable.Size = new System.Drawing.Size(99, 40);
             this.RoundLable.TabIndex = 2;
             this.RoundLable.Text = "Round";
             // 
@@ -85,12 +85,11 @@
             this.RoundDropdown.Name = "RoundDropdown";
             this.RoundDropdown.Size = new System.Drawing.Size(223, 38);
             this.RoundDropdown.TabIndex = 3;
+            this.RoundDropdown.SelectedIndexChanged += new System.EventHandler(this.RoundDropdown_SelectedIndexChanged);
             // 
             // UnplayedOnlyCheckbox
             // 
             this.UnplayedOnlyCheckbox.AutoSize = true;
-            this.UnplayedOnlyCheckbox.Checked = true;
-            this.UnplayedOnlyCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.UnplayedOnlyCheckbox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.UnplayedOnlyCheckbox.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UnplayedOnlyCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
@@ -110,6 +109,7 @@
             this.matchupListBox.Name = "matchupListBox";
             this.matchupListBox.Size = new System.Drawing.Size(322, 272);
             this.matchupListBox.TabIndex = 5;
+            this.matchupListBox.SelectedIndexChanged += new System.EventHandler(this.matchupListBox_SelectedIndexChanged);
             // 
             // teamOneNameLable
             // 
@@ -131,20 +131,20 @@
             this.teamOneScoreLable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
             this.teamOneScoreLable.Location = new System.Drawing.Point(369, 212);
             this.teamOneScoreLable.Name = "teamOneScoreLable";
-            this.teamOneScoreLable.Size = new System.Drawing.Size(124, 40);
+            this.teamOneScoreLable.Size = new System.Drawing.Size(87, 40);
             this.teamOneScoreLable.TabIndex = 7;
-            this.teamOneScoreLable.Text = "<score>";
+            this.teamOneScoreLable.Text = "Score";
             // 
             // teamOneScoreValue
             // 
-            this.teamOneScoreValue.Location = new System.Drawing.Point(494, 217);
+            this.teamOneScoreValue.Location = new System.Drawing.Point(462, 217);
             this.teamOneScoreValue.Name = "teamOneScoreValue";
             this.teamOneScoreValue.Size = new System.Drawing.Size(100, 35);
             this.teamOneScoreValue.TabIndex = 8;
             // 
             // teamTwoScoreValue
             // 
-            this.teamTwoScoreValue.Location = new System.Drawing.Point(494, 409);
+            this.teamTwoScoreValue.Location = new System.Drawing.Point(462, 409);
             this.teamTwoScoreValue.Name = "teamTwoScoreValue";
             this.teamTwoScoreValue.Size = new System.Drawing.Size(100, 35);
             this.teamTwoScoreValue.TabIndex = 11;
@@ -157,9 +157,9 @@
             this.teamTwoScoreLable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
             this.teamTwoScoreLable.Location = new System.Drawing.Point(369, 404);
             this.teamTwoScoreLable.Name = "teamTwoScoreLable";
-            this.teamTwoScoreLable.Size = new System.Drawing.Size(124, 40);
+            this.teamTwoScoreLable.Size = new System.Drawing.Size(87, 40);
             this.teamTwoScoreLable.TabIndex = 10;
-            this.teamTwoScoreLable.Text = "<score>";
+            this.teamTwoScoreLable.Text = "Score";
             // 
             // teamTwoNameLable
             // 

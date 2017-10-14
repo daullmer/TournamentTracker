@@ -11,6 +11,33 @@ namespace TrackerLibrary.Models
         public Team Winner { get; set; }
         public int WinnerId { get; set; }
         public int MatchupRound { get; set; }
+        public string DisplayName {
+            get
+            {
+                string output = "";
+                foreach (MatchupEntry me in Entrys)
+                {
+                    if (me.TeamCompeting != null)
+                    {
+                        if (output.Length == 0)
+                        {
+                            output = me.TeamCompeting.TeamName;
+                        }
+                        else
+                        {
+                            output += $" vs. {me.TeamCompeting.TeamName}";
+                        } 
+                    }
+                    else
+                    {
+                        output = "Matchup not yet determined";
+                        break;
+                    }
+                }
+                return output;
+            }
+
+        }
 
         public override string ToString()
         {
