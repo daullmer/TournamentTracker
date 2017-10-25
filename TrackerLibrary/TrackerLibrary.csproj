@@ -48,6 +48,7 @@
     <Compile Include="DataAccess\SQLConnector.cs" />
     <Compile Include="DataAccess\TextConnector.cs" />
     <Compile Include="DataAccess\TextConnectorProcessor.cs" />
+    <Compile Include="EmailLogic.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="GlobalConfig.cs" />
     <Compile Include="Models\Matchup.cs" />
