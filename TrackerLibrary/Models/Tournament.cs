@@ -14,5 +14,12 @@ namespace TrackerLibrary.Models
         public List<List<Matchup>> Rounds { get; set; } = new List<List<Matchup>>();
 
         public override string ToString() => TournamentName;
+
+        public event EventHandler<DateTime> OnTournamentComplete;
+
+        public void CompleteTournament()
+        {
+            OnTournamentComplete?.Invoke(this, DateTime.Now);
+        }
     }
 }

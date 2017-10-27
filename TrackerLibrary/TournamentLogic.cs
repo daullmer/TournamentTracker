@@ -194,8 +194,102 @@ namespace TrackerLibrary
                 {
                     output += 1;
                 }
+                else
+                {
+                    return output;
+                }
             }
 
+            // Tournement is complete
+            CompleteTournament(model);
+            return output - 1;
+        }
+
+        private static void CompleteTournament(Tournament model)
+        {
+            GlobalConfig.Connection.CompleteTournament(model);
+            Team winners = model.Rounds.Last().First().Winner;
+            Team runnerUp = model.Rounds
+                .Last()
+                .First()
+                .Entrys
+                .Where(x => x.TeamCompeting != winners)
+                .First()
+                .TeamCompeting;
+
+            decimal winnerPrize = 0;
+            decimal runnerUpPrize = 0;
+
+            if (model.Prizes.Count > 0)
+            {
+                decimal totalIncome = model.EnteredTeams.Count * model.EntryFee;
+
+                Prize firstPlacePrize = model.Prizes.Where(x => x.PlaceNumber == 1).FirstOrDefault();
+                if (firstPlacePrize != null)
+                {
+                    winnerPrize = firstPlacePrize.CalculatePrizePayout(totalIncome);
+                }
+
+                Prize secoundPlacePrize = model.Prizes.Where(x => x.PlaceNumber == 2).FirstOrDefault();
+                if (firstPlacePrize != null)
+                {
+                    runnerUpPrize = secoundPlacePrize.CalculatePrizePayout(totalIncome);
+                }
+            }
+
+            // Send Email to all tournament
+            string subject = "";
+            StringBuilder body = new StringBuilder();
+            
+            subject = $"In {model.TournamentName}, {winners.TeamName} has won!";
+            body.AppendLine("<h1>We have a WINNER</h1>");
+            body.AppendLine("<p>Congratiulations to our winner on a great tournament.</p>");
+            body.AppendLine("<br />");
+
+            if (winnerPrize > 0)
+            {
+                body.AppendLine($"<p>{winners.TeamName} will receive ${winnerPrize} </p>");
+            }
+
+            if (runnerUpPrize > 0)
+            {
+                body.AppendLine($"<p>{runnerUp.TeamName} will receive ${runnerUpPrize} </p>");
+            }
+
+            body.AppendLine("<p> Thanks for a great tournament everyone!</p>");
+            body.AppendLine("~Tournament Tracker");
+
+            List<string> bcc = new List<string>();
+
+            foreach (Team t in model.EnteredTeams)
+            {
+                foreach (Person p in t.TeamMembers)
+                {
+                    if (p.EmailAdress.Length > 0)
+                    {
+                        bcc.Add(p.EmailAdress); 
+                    }
+                }
+            }
+
+            EmailLogic.SendEmail(new List<string>(), bcc, subject, body.ToString());
+
+            // Complete Tournametn
+            model.CompleteTournament();
+        }
+
+        private static decimal CalculatePrizePayout(this Prize prize, decimal totalIncome)
+        {
+            decimal output = 0;
+
+            if (prize.PrizeAmount > 0)
+            {
+                output = prize.PrizeAmount;
+            }
+            else
+            {
+                output = Decimal.Multiply(totalIncome, Convert.ToDecimal(prize.PrizePercentage / 100));
+            }
             return output;
         }
 

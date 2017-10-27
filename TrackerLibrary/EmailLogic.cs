@@ -9,12 +9,19 @@ namespace TrackerLibrary
 {
     public static class EmailLogic
     {
-        public static void SendEmail(string toAdresses, string subject, string body)
+        public static void SendEmail(List<string> toAdresses, List<string> bcc, string subject, string body)
         {
             MailAddress fromMailAdress = new MailAddress(GlobalConfig.AppKeyLookup("senderEamil"), GlobalConfig.AppKeyLookup("senderName"));
 
             MailMessage mail = new MailMessage();
-            mail.To.Add(toAdresses);
+            foreach (string email in toAdresses)
+            {
+                mail.To.Add(email);
+            }
+            foreach (string email in bcc)
+            {
+                mail.Bcc.Add(email);
+            }
             mail.From = fromMailAdress;
             mail.Subject = subject;
             mail.Body = body;
@@ -25,5 +32,11 @@ namespace TrackerLibrary
             client.Send(mail);
 
         }
+
+        public static void SendEmail(string toAdresses, string subject, string body)
+        {
+            SendEmail(new List<string> { toAdresses }, new List<string>(), subject, body);
+        }
+
     }
 }
